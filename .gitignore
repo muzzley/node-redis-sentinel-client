@@ -1,0 +1,5 @@
+node-redis-sentinel-client.sublime-project
+node-redis-sentinel-client.sublime-workspace
+
+node_modules
+npm-debug.log

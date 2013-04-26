@@ -1,0 +1,29 @@
+{
+  "name": "redis-sentinel-client",
+  "version": "0.1.0",
+  "description": "Transparent Redis Sentinel client",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --ui bdd --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DocuSignDev/node-redis-sentinel-client.git"
+  },
+  "dependencies": {
+    "redis": ">= 0.8.3"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "keywords": [
+    "redis",
+    "redis-sentinel"
+  ],
+  "author": {
+    "name": "Ben Buckman",
+    "email": "ben.buckman@docusign.com"
+  },
+  "license": "MIT"
+}
