@@ -11,7 +11,7 @@
     "url": "https://github.com/DocuSignDev/node-redis-sentinel-client.git"
   },
   "dependencies": {
-    "redis": ">= 0.8.3"
+    "redis": "https://github.com/DocuSignDev/node_redis/archive/master.tar.gz"
   },
   "devDependencies": {
     "mocha": "*",
