@@ -20,6 +20,8 @@ options includes:
 - masterName
 - logger (e.g. winston)
 - debug (boolean)
+
+@todo does this still work w/ (port,host) syntax?
 */
 function RedisSentinelClient(options) {
   // make this an EventEmitter (also below)
@@ -366,8 +368,6 @@ exports.createClient = function (port, host, options) {
     options.port = port;
     options.host = host;
   }
-
-  // @todo use a net client like redisClient?
 
   return new RedisSentinelClient(options);
 };
