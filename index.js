@@ -13,19 +13,6 @@ var RedisSingleClient = require('redis'),
     commands = RedisSingleClient.commands;
 
 
-// @todo put this in utils.js
-// take 2 arrays and return the union of their elements
-function set_union(seta, setb) {
-    var obj = {};
-    seta.forEach(function (val) {
-        obj[val] = true;
-    });
-    setb.forEach(function (val) {
-        obj[val] = true;
-    });
-    return Object.keys(obj);
-}
-
 /*
 options includes:
 - host
