@@ -40,6 +40,8 @@ See related thread about different approaches to Sentinel support: https://githu
 
 ```
 var RedisSentinel = require('redis-sentinel-client');
+var sentinelClient = RedisSentinel.createClient(options);
+// or
 var sentinelClient = RedisSentinel.createClient(PORT, HOST);
 ```
 
