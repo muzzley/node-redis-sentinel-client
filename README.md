@@ -36,6 +36,8 @@ See related thread about different approaches to Sentinel support: https://githu
 
 ## Usage
 
+`npm install redis-sentinel-client`
+
 ```
 var RedisSentinel = require('redis-sentinel-client');
 var sentinelClient = RedisSentinel.createClient(options);
