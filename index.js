@@ -1,8 +1,6 @@
 /**
-...
-
-- can no longer create a sentinel client thru redis.createClient({sentinel:true})
-- @todo copy failover test from gist
+Redis Sentinel client, add-on for node_redis client.
+See readme for details/usage.
 */
 
 var RedisSingleClient = require('redis'),
@@ -50,7 +48,6 @@ function RedisSentinelClient(options) {
   // Make new client
   self.activeMasterClient = new RedisSingleClient.createClient( 9999, '127.0.0.1',
     {
-      sentinel: false,
       disable_flush: true // Disables flush_and_error, to preserve queue
     }
   );
@@ -113,7 +110,7 @@ function RedisSentinelClient(options) {
   // one client to query ('talker'), one client to subscribe ('listener').
   // these are standard redis clients.
   // talker is used by reconnect() below
-  this.sentinelTalker = new RedisSingleClient.createClient(options.port, options.host, { sentinel: false });
+  this.sentinelTalker = new RedisSingleClient.createClient(options.port, options.host);
   this.sentinelTalker.on('connect', function(){
     self.debug('connected to sentinel talker');
   });
@@ -127,7 +124,7 @@ function RedisSentinelClient(options) {
     // @todo does it automatically reconnect? (supposed to)
   });
 
-  var sentinelListener = new RedisSingleClient.createClient(options.port, options.host, { sentinel: false });
+  var sentinelListener = new RedisSingleClient.createClient(options.port, options.host);
   sentinelListener.on('connect', function(){
     self.debug('connected to sentinel listener');
   });
