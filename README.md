@@ -1,5 +1,5 @@
-Redis Sentinel Client
-===========================
+# Redis Sentinel Client for Node.js
+
 
 Supplements [node_redis](https://github.com/mranney/node_redis) with [Redis Sentinel](http://redis.io/topics/sentinel) support.
 
