@@ -1,3 +1,5 @@
 npm-debug.log
 .git*
 .DS_Store
+node-redis-sentinel-client.sublime-project
+node-redis-sentinel-client.sublime-workspace
