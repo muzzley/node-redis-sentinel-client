@@ -10,7 +10,7 @@ var should = require('should');
 var RedisSentinel = require('../index');
 
 // test helpers shared with node_redis tests
-var testUtils = require('redis/test/utils.js'),
+var testUtils = require('redis/test_utils.js'),
     require_string = testUtils.require_string,
     require_error = testUtils.require_error,
     require_number = testUtils.require_number;
