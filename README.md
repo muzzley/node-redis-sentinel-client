@@ -13,8 +13,6 @@ From the Sentinel docs:
 > where a slave is promoted to master, the other additional slaves are reconfigured to use the new master, 
 > and the applications using the Redis server informed about the new address to use when connecting.
 
-Created by the [Node.js team at DocuSign](https://github.com/DocuSignDev).
-
 
 ## Goals
 
@@ -98,3 +96,11 @@ and buffers all IO, including pub/sub, not losing any data integrity during the 
   - But thinking not: Just create multiple sentinel clients, one per cluster.
 
 
+## Credits
+
+Created by the [Node.js team at DocuSign](https://github.com/DocuSignDev) (in particular [Ben Buckman](https://github.com/newleafdigital) and [Derek Bredensteiner](https://github.com/proksoup)).
+
+
+## License
+
+MIT
