@@ -22,9 +22,15 @@
     "redis",
     "redis-sentinel"
   ],
-  "author": {
-    "name": "Ben Buckman",
-    "email": "ben.buckman@docusign.com"
-  },
+  "authors": [
+    {
+      "name": "Ben Buckman",
+      "email": "ben.buckman@docusign.com"
+    },
+    {
+      "name": "Derek Bredensteiner",
+      "email": "derek.bredensteiner@docusign.com"
+    }
+  ],
   "license": "MIT"
 }
