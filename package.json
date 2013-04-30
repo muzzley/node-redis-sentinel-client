@@ -22,7 +22,8 @@
     "redis",
     "redis-sentinel"
   ],
-  "authors": [
+  "author": "Ben Buckman <ben.buckman@docusign.com> (https://github.com/newleafdigital)",
+  "contributors": [
     {
       "name": "Ben Buckman",
       "email": "ben.buckman@docusign.com"
