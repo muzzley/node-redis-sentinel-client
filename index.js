@@ -18,8 +18,6 @@ options includes:
 - masterName
 - logger (e.g. winston)
 - debug (boolean)
-
-@todo does this still work w/ (port,host) syntax?
 */
 function RedisSentinelClient(options) {
   // make this an EventEmitter (also below)
@@ -44,8 +42,6 @@ function RedisSentinelClient(options) {
   }
 
   // this client will always be connected to the active master
-  self.debug("Creating new dummy master");
-  // Make new client
   self.activeMasterClient = new RedisSingleClient.createClient( 9999, '127.0.0.1',
     {
       disable_flush: true // Disables flush_and_error, to preserve queue
