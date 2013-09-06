@@ -20,6 +20,12 @@ options includes:
 - debug (boolean)
 */
 function RedisSentinelClient(options) {
+
+  // RedisClient takes (stream,options). we don't want stream, make sure only one.
+  if (arguments.length > 1) {
+    throw new Error("Sentinel client takes only options to initialize");
+  }
+
   // make this an EventEmitter (also below)
   events.EventEmitter.call(this);
 
@@ -36,17 +42,30 @@ function RedisSentinelClient(options) {
     throw new Error("Sentinel client needs a host and port");
   }
 
-  // RedisClient takes (stream,options). we don't want stream, make sure only one.
-  if (arguments.length > 1) {
-    throw new Error("Sentinel client takes only options to initialize");
+
+  // if debugging is enabled for sentinel client, enable master client's too.
+  // (standard client just uses console.log, not the 'logger' passed here.)
+  if (options.debug) {
+    RedisSingleClient.debug_mode = true;
   }
 
-  // this client will always be connected to the active master
-  self.activeMasterClient = new RedisSingleClient.createClient( 9999, '127.0.0.1',
-    {
-      disable_flush: true // Disables flush_and_error, to preserve queue
-    }
-  );
+
+  var masterOptions = {
+    disable_flush: true // Disables flush_and_error, to preserve queue
+  };
+
+  // if master & slaves need a password to authenticate,
+  // pass it in as 'master_auth_pass'.
+  // (corresponds w/ 'auth_pass' for normal client,
+  // but differentiating b/c we're not authenticating to the *sentinel*, rather to the master/slaves.)
+  // by setting it to 'auth_pass' on master client, it should authenticate to the master (& slaves on failover).
+  // note, sentinel daemon's conf needs to know this same password too/separately.
+  masterOptions.auth_pass = options.master_auth_pass || null;
+
+  // this client will always be connected to the active master.
+  // using 9999 as initial; expected to fail; is replaced & re-connected to real port later.
+  self.activeMasterClient = new RedisSingleClient.createClient(9999, '127.0.0.1', masterOptions);
+
   
   // pass up errors
   // @todo emit a separate 'master error' event?
@@ -216,6 +235,14 @@ RedisSentinelClient.prototype.reconnect = function reconnect(onReconnectCallback
 
     // reconnect it
     self.activeMasterClient.forceReconnectionAttempt();
+
+
+    // [re-]authenticate. see 'master_auth_pass' above.
+    // @REVIEW - this fires 'connect' events etc; do we need to handle events below differently in this case?
+    if (self.activeMasterClient.auth_pass) {
+      self.debug("re-authenticating to master");
+      self.activeMasterClient.do_auth();
+    }
 
 
 
