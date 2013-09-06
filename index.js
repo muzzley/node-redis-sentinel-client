@@ -82,12 +82,12 @@ function RedisSentinelClient(options) {
   });
 
 
-['unsubscribe','end'].forEach(function(staticProp){
-  self.activeMasterClient.on(staticProp, function(a, b, c, d){
-    self.emit(staticProp, a, b, c, d);
+  ['unsubscribe','end'].forEach(function(staticProp){
+    // @todo rewrite this to use `apply`
+    self.activeMasterClient.on(staticProp, function(a, b, c, d){
+      self.emit(staticProp, a, b, c, d);
+    });
   });
-});
-
 
 
   // used for logging & errors
