@@ -233,16 +233,9 @@ RedisSentinelClient.prototype.reconnect = function reconnect(onReconnectCallback
     self.activeMasterClient.host = newMaster.host;
     self.activeMasterClient.port = newMaster.port;
 
-    // reconnect it
+    // reconnect it.
+    // (if using auth, should re-auth automatically too.)
     self.activeMasterClient.forceReconnectionAttempt();
-
-
-    // [re-]authenticate. see 'master_auth_pass' above.
-    // @REVIEW - this fires 'connect' events etc; do we need to handle events below differently in this case?
-    if (self.activeMasterClient.auth_pass) {
-      self.debug("re-authenticating to master");
-      self.activeMasterClient.do_auth();
-    }
 
 
 
