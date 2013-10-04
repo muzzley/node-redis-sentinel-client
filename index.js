@@ -243,7 +243,7 @@ RedisSentinelClient.prototype.reconnect = function reconnect(onReconnectCallback
     // @todo use no_ready_check = true? then change this 'ready' to 'connect'
 
     // backwards-compat. w/RedisClient
-    self.activeMasterClient.once('connect', function(){
+    self.activeMasterClient.on('connect', function(){
       self.emit('connect');
       self.emitMasterErrors = true;
     });
