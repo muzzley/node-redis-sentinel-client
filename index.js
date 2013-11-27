@@ -15,6 +15,7 @@ var RedisSingleClient = require('redis'),
 options includes:
 - host
 - port
+- masterOptions
 - masterName
 - logger (e.g. winston)
 - debug (boolean)
@@ -49,10 +50,8 @@ function RedisSentinelClient(options) {
     RedisSingleClient.debug_mode = true;
   }
 
-
-  var masterOptions = {
-    disable_flush: true // Disables flush_and_error, to preserve queue
-  };
+  var masterOptions = options.masterOptions || {};
+  masterOptions.disable_flush = true; // Disables flush_and_error, to preserve queue
 
   // if master & slaves need a password to authenticate,
   // pass it in as 'master_auth_pass'.
