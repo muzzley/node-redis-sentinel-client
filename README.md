@@ -50,6 +50,7 @@ Now use `sentinelClient` as a regular client: `set`, `get`, `hmset`, etc.
 ## Instantiation options
 
 - `masterName`: Which master the sentinel is listening to. Defaults to 'mymaster'. (If a sentinel is listening to multiple masters, create multiple `SentinelClients`.)
+- `masterOptions`: The options object which will be passed on to the Redis master client connection. See the [node_redis](https://github.com/mranney/node_redis#rediscreateclientport-host-options) documentation for more details.
 - `master_auth_pass`: If your master and slave(s) need authentication (`options.auth_pass` in node_redis, as of 0.8.5), this is passed on. (Note, the sentinel itself does not take authentication.)
 - `logger`: pass in [winston](https://github.com/flatiron/winston) or another custom logger, otherwises uses console. (Expects a `log` method.)
 - `debug`: verbose output (to `logger` about internal ops)
